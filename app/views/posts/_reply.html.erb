@@ -1,0 +1,36 @@
+<h2>Replies</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>User</th>
+        <th>Reply</th>
+        <th></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @post.replies.each do |reply| %>
+        <tr>
+          <td><%= reply.reply_user %></td>
+          <td><%= reply.body %></td>
+          <td><%= link_to 'Destroy Reply', [reply.post, reply], method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+<h2>Add a Reply:</h2>
+
+<%= form_for([@post, @post.replies.build]) do |f| %>
+  <p>
+    <%= f.label :reply_user %><br>
+    <%= f.text_field :reply_user %>
+  </p>
+  <p>
+    <%= f.label :body %><br>
+    <%= f.text_area :body %>
+  </p>
+  <p>
+    <%= f.submit %>
+  </p>
+<% end %>
